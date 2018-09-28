@@ -1,7 +1,9 @@
 import numpy as np
 import pylab as pl
 from matplotlib import collections  as mc
+import matplotlib
 
+matplotlib.use('Agg')
 lines = [
 [(2, -1), (2, 2), (5, 5), (5, 6), (3,8)],
 [(4, 2), (4, 8)], 
