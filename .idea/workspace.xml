@@ -4,9 +4,10 @@
     <list default="true" id="fa9505b9-38fd-4100-8392-67de35cdbe81" name="默认" comment="">
       <change beforePath="$USER_HOME$/PycharmProjects/headfirst/.idea/misc.xml" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/headfirst/.idea/misc.xml" afterDir="false" />
       <change beforePath="$USER_HOME$/PycharmProjects/headfirst/.idea/workspace.xml" beforeDir="false" afterPath="$USER_HOME$/PycharmProjects/headfirst/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/a1ece650.py" beforeDir="false" afterPath="$PROJECT_DIR$/a1ece650.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/intersect.py" beforeDir="false" afterPath="$PROJECT_DIR$/intersect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_intersect.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_intersect.py" afterDir="false" />
       <change beforePath="$USER_HOME$/myscripts/Python/4_7.py" beforeDir="false" />
       <change beforePath="$USER_HOME$/myscripts/Python/CalculatorForErlangSystem/README.md" beforeDir="false" />
       <change beforePath="$USER_HOME$/myscripts/Python/backup_rapp.py" beforeDir="false" />
@@ -25,7 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/uwaterlooEce650$test_intersect.coverage" NAME="test_intersect Coverage Results" MODIFIED="1538320577798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/uwaterlooEce650$test_intersect.coverage" NAME="test_intersect Coverage Results" MODIFIED="1538343956695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/uwaterlooEce650$a1ece650.coverage" NAME="a1ece650 Coverage Results" MODIFIED="1538320522415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/a1ece650$a1ece650.coverage" NAME="a1ece650 Coverage Results" MODIFIED="1536761870539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -44,26 +45,28 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="2" />
+          <entry key="py" value="6" />
           <entry key="test_intersect" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="2" />
+          <entry key="Python" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="14" />
+          <entry key="py" value="238" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="14" />
+          <entry key="Python" value="238" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages" />
+      <usages-collector id="statistics.js.language.service.starts" />
     </session>
   </component>
   <component name="FavoritesManager">
@@ -74,20 +77,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/a1ece650.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+            <state relative-caret-position="647">
+              <caret line="96" column="27" selection-start-line="96" selection-start-column="27" selection-end-line="96" selection-end-column="27" />
               <folding>
-                <marker date="1538320460000" expanded="true" signature="2195:2214" ph="..." />
+                <element signature="e#44#75#0" expanded="true" />
+                <marker date="1538344433000" expanded="true" signature="2643:2652" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="41" column="12" lean-forward="true" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/intersect.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="707">
+              <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_intersect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="42" column="31" lean-forward="true" selection-end-line="84" />
+            <state relative-caret-position="1344">
+              <caret line="84" column="11" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -107,8 +129,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/a1ece650.py" />
         <option value="$PROJECT_DIR$/test_intersect.py" />
+        <option value="$PROJECT_DIR$/intersect.py" />
+        <option value="$PROJECT_DIR$/a1ece650.py" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -295,13 +319,13 @@
     <frame x="4" y="22" width="1276" height="774" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2720588" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2720588" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32880846" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39969835" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32880846" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39969835" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -340,20 +364,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test_intersect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1344">
+          <caret line="84" column="11" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/intersect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="707">
+          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/a1ece650.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+        <state relative-caret-position="647">
+          <caret line="96" column="27" selection-start-line="96" selection-start-column="27" selection-end-line="96" selection-end-column="27" />
           <folding>
-            <marker date="1538320460000" expanded="true" signature="2195:2214" ph="..." />
+            <element signature="e#44#75#0" expanded="true" />
+            <marker date="1538344433000" expanded="true" signature="2643:2652" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_intersect.py">
+    <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="42" column="31" lean-forward="true" selection-end-line="84" />
+        <state relative-caret-position="306">
+          <caret line="41" column="12" lean-forward="true" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
         </state>
       </provider>
     </entry>

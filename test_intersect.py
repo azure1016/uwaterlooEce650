@@ -83,5 +83,3 @@ L1,L2 = Line(p1,p2), Line(p3,p4)
 l = intersect_on_segment(L1,L2,4)
 for i in l:
     print i
-
-	

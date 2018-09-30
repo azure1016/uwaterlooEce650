@@ -15,6 +15,15 @@ class Point(object):
     def __le__ (self, other):
         return self.x <= other.x
 
+    def is_in(self, p, some_list):
+        for i in some_list:
+            if i == p:
+                return True
+        return False
+
+    # def search_index(self,other):
+    #     for
+
 class Line(object):
     intersections = []
     def __init__ (self, src, dst):
@@ -83,5 +92,5 @@ if __name__ == '__main__':
     l1 = Line (p1, p2)
     l2 = Line (p3, p4)
     print 'Intersect of', l1, 'with', l2, 'is:' 
-    for i in intersect(l1, l2):
+    for i in intersect_on_segment(l1, l2,4):
         print i
