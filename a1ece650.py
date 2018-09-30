@@ -1,62 +1,62 @@
 #!/usr/bin/python
 # -*- coding: <utf-8> -*-
-
+from __future__ import division
 import sys
 import matplotlib
 import re
 import numpy as np
 import pylab as pl
 from matplotlib import collections  as mc
-from __future__ import division
+
 import intersect
 #you can use py3to2 to change python3 to python2
-class Street:
-    vertices_base = {} 
+class Street(object):
+    vb_dc_l = {} 
     #{
-    #"street_1":{"1":(1,2), "2":(2,3)}
-    #"street_2":{"3":(3,4), "4":(4,5)}
-    #"street_3":{"5":(5,6),"6":(6,7)}
+
+    #"st2":[Point(3,4), Point(4,5)]
     #}
-    vertices_base_backup = {}
-    edges_base = {
-    #"street_1":[(),(),...()]
-    #"street_2":[(),(),...()]
+
+    eb_dc_l = {
+    #"st1":[l1,l2,l3]
+    #"st2":[l4,l5,l6]
     }
     plot_base = {}
     #flag for the four cmds
-    street_flag = 0 #0 for end of street, 1 for continuing
-    flags =[0,0,0]
-    unique_index = 0
+    
+    uniq_v_index = 0
+    uniq_st_index = 0
 
-    def __init__(self,vBase,eBase):
-        self.vertices_base.append(vBase)
-        self.edges_base.append(eBase)
+    # def __init__(self,v_dc,e_l):
+    #     self.vb_dc_l.append(v_dc)
+    #     self.eb_dc_l.append(e_l)
 
-    def add_street(self,street_name,vItem,eItem):
-        #vItem is a dictionary while eItem is a list
-        if self.vertices_base.has_key[street_name.upper()] == False:
-            self.vertices_base[street_name.upper()] = vItem
-            self.edges_base[street_name.upper()] = eItem
+    def add_street(self,street_name,vi_l,ei_l):
+        #vi_l = get_coordinates(),ei_l = get_lines()
+        if self.vb_dc_l.has_key[street_name.upper()] == False:
+            self.vb_dc_l[street_name.upper()] = vi_l
+            self.eb_dc_l[street_name.upper()] = ei_l
+            #self.edges_list.add(ei_l)
         else:
             stdout("You added a street that has existed!")
 
     def delete_street(self,street_name):
-        if self.vertices_base.has_key[street_name.upper()] == False:
-            del self.vertices_base[street_name.upper()]
-            del self.edges_base[street_name.upper()]
+        if self.vb_dc_l.has_key[street_name.upper()] == False:
+            del self.vb_dc_l[street_name.upper()]
+            del self.eb_dc_l[street_name.upper()]
         else:
             stdout("The street you want to delete doesn't even exist!")
 
-    def change_street(self,street_name,newVItem,newEItem):
-        if self.vertices_base.has_key[street_name.upper()] == False:
-            self.vertices_base[street_name.upper()] = newVItem
-            self.edges_base[street_name.upper()] = newEItem
+    def change_street(self,street_name,newvi_l,newei_l):
+        if self.vb_dc_l.has_key[street_name.upper()] == False:
+            self.vb_dc_l[street_name.upper()] = newvi_l
+            self.eb_dc_l[street_name.upper()] = newei_l
         else:
             stdout("The street you want to change doesn't exist. Please check again.")
 
     def show_graph(self):
-        if len(self.vertices_base)>0:
-            for v_s in self.vertices_base.values(): #v_s is a line
+        if len(self.vb_dc_l)>0:
+            for v_s in self.vb_dc_l.values(): #v_s is a line
                 self.plot_base.append(v_s)
         else:
             stdout("The graph is empty.")
@@ -69,41 +69,54 @@ class Street:
             ax.margins(0.1)
             pl.show()
 
-    def flags_clear(self):
-        self.flags = [0,0,0]
+    def text_graph(self):
+        pass
+
+    # def flags_clear(self):
+    #     self.flags = [0,0,0]
     
     def get_coordinates(self,str_read):
         # return {"A":(a,b),"B":(c,d)}
-        cord =  re.findall(r'(\(.*?\)\s*)+',str_read) 
+        cord =  re.findall(r'(\(\d+,\d+\)\s*)',str_read) 
         try:
             #might have invalid input so that can't eval
-            vertices = {} 
+            vertices = [] 
             for val in cord:
-                vertices[unique_index] = eval(val)  
-                unique_index = unique_index + 1
+                cor = eval(val)
+                p = Point(cor[0],cor[1],uniq_v_index)
+                vertices.append(p) 
+                uniq_v_index = uniq_v_index + 1
             return vertices
         except exception1:
             pass# for now
 
-    def get_edges(self,vBase):
-        #return a list:[(1,2),(2,3),(3,4)]
-        v_k = vBase.keys()
-        edges = []
-        for i in range(0,len(v_k)-2):
-            edges[i] = (i,i+1)
-        return edges
+    # def get_edges(self):
+    #     #return a list of Line objects
+    #     v_k = vi_l.keys()
+    #     edges = []
+    #     for i in range(0,len(v_k)-2):
+    #         edges[i] = (i,i+1)
+    #     return edges
+
+    def get_lines(self,vi_l):
+        #vi_l is a dictionary. return a list:[(1,2),(2,3),(3,4)]
+        for v in self.vb_dc_l.values():
+            for i in range(0,len(v)-2):
+                l = Line(v[i],v[i+1])
+                eb_dc_l[v.get_key()].append(l)
 
     def process_cmd(self,str_read):
         #cmd = re.search(r'^(\s)*[ac]\s+"((\w+\s*)+)"\s+(\(.*?\)\s*)+',str_read)
         self.flags_clear()
         cmd_ac = re.search(r'^\s*([ac])\s+".*?"\s+(\(.*?\)\s*)+$',str_read)
         if cmd_ac != None:
-            vItem = get_coordinates(str_read)
+            vi_l = get_coordinates(str_read)
+            ei_l = get_edges(str_read)
             str_list = cmd_ac.groups()
             if str_list[0] == "a":               
-                add_street(str_list[1],vItem)
+                add_street(str_list[1],vi_l,ei_l)
             elif str_list[0] == "c":
-                change_street(str_list[1],vItem)
+                change_street(str_list[1],vi_l,ei_l)
         else:
             cmd_r = re.search(r'^(\s)*[r]\s+"(.*?)"\s*$',str_read) 
             if cmd_r != None:
@@ -119,84 +132,35 @@ class Street:
         #return False
 
     #def process_graph(self):
-        #for i in range(0,len(self.edges_base))
+        #for i in range(0,len(self.eb_dc_l))
 
-class VertexCover:
-    valid_vertices = {}
-    valid_edges = {
-    #"street_1":[(a,b),(b,c)],
-    #"street_2":[],
-    #"street_3":[]...
-    }
+# class VertexCover(object):
+#     valid_vertices = {}
+#     valid_edges = {
+#     #"street_1":[(a,b),(b,c)],
+#     #"street_2":[],
+#     #"street_3":[]...
+#     }
 
-    def __init__(self,vBase,eBase):
-        valid_vertices = vBase
-        valid_edges = eBase
+#     def __init__(self,v_dc,e_l):
+#         valid_vertices = v_dc
+#         valid_edges = e_l
 
-    def make_valid_cover(self):
-        e_end = len(self.valid_edges) -1
-        for i in range(0,e_end):
-            for j in range(i+1,e_end):
-                for m in range(0,len(self.edges_base[i])-1):
-                    for n in range(0,len(self.edges_base[j])-1):
+#     def make_valid_cover(self,v_dc,e_l):
+#         #e_l have to be a list rather than a dictionary
+#         #e_l = Street().eb_dc_l.values(), a list of list
+#         e_end = len(self.e_l) -1 #the total streets
+#         for i in range(0,e_end):
+#             st_i = self.e_l[i]
+#             for j in range(i+1,e_end):
+#                 st_j = self.eb_dc_l[j]
+#                 for m in range(0,len(st_i)-1):
+#                     e1 = st_i[m]#edges on the street
+#                     for n in range(0,len(st_j)-1):
+#                         e2 = st_j[n]
+#                         e1_seg = Line(Point(e1[0],e1[1]),Point())
                         
 
-# try:
-#    # str_read = stdin("enter your command: a add c change r remove g output graph:")
-#     str_read = 'a "Weber Street" (12,20) (2,1) (3,4)'
-
-#     cmd = re.search(r'(?P<op>[acrg])\s+"(?P<street>(\w+\s*)+)"\s+(?P<coordinates>\(.*?\)\s*)+',str_read)
-#     print(cmd.groups())
-#     #cor = re.findall(r'.*?\((\d+),.*?\)',str_read)
-#     #cmd = re.search(r'\([0-9]*\.?[0-9]+,[0-9]*\.?[0-9]+\)\s+',str_read)  
-#     #py = re.findall(r'.*?\(.*?,(\d+)\)',str_read)
-#     teststr = '(0,1) (1,2)'
-#     #cmd = re.search(r'\([0-9]\d*,[0-9]\d*\)',str_read) 
-#     if True:
-#         res = cmd.groupdict()
-#         print(res['coordinates']+" is digits")
-#         if cor: 
-#           # px = cor['x']
-#            print cor
-#         if py:
-#            #res['coordinates'] = cor
-#            print(py)
-#         if res['op'] == 'a':
-#            pass
-           
-#     else: 
-#         print("nothing found")
-# #actually can be processed with one exception
-# except BaseException:
-#     pass
-# finally:
-#     pass
-
-try: 
-    ns = Street()
-    while True:
-        #std_read = stdin("please input the command:")
-        #I heard that stdin will get a \n
-        std_read = a "King Street" (2,1) (1.2,2.3) (4.2,2)       
-        if ns.isValidCmd(std_read):
-            for i in range(0,2):
-                if ns.flags[i] == 1:
-
-#test case:
-#input1: a "King Street" (2,1) (1.2,2.3) (4.2,2) #float match
-#input2: a "King street" (3,4) (4,5) #add an existing street
-#input3: a "weber street" (2,3) #add/change a street with one point
-#input4: a "university ave" (2,3) (3,6)(9,0) #missing space between coordinates
-#input5: a " King street west" (3,2) (2,5) #extra space on the cmd
-#input6:   c  " university  ave " (2,3 ) (4   ,6) #extra space on the cmd
-#input7: c "cedarbrae avenue" (3,4) (1,3)
-#input8: c "king street" (3,4) (1,2) #smaller case
-#input:  a "albert street" (2,1) (1,2,2.3) #street overlap
-
-#所以，重叠的街道，所有重合的顶点都是交叉点？
-#我之前以为重叠的街道只算首尾的点才是交叉点呢）（可是万一只是线段重合，但是顶点并没有重合呢？？）
-#please format the float as 0.2f
-#denominator == 0, is it exactly 0?
 
 
 
