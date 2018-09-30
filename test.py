@@ -32,13 +32,15 @@ import a1ece650
 
 try: 
     ns = Street()
+    print "please input the command:"
     while True:
-        print "please input the command:",
-        std_read = sys.stdin.readline()[:-1] #discard '\n' at the end
+        std_read = sys.stdin.readline()#[:-1] #discard '\n' at the end
         #I heard that stdin will get a \n
         #std_read = a "King Street" (2,1) (1.2,2.3) (4.2,2)       
         if ns.isValidCmd(std_read):
             ns.process_cmd(std_read)
+except exception1:
+    pass
             
 #test case:
 #input1: a "King Street" (2,1) (1.2,2.3) (4.2,2) #float match
@@ -51,7 +53,5 @@ try:
 #input8: c "king street" (3,4) (1,2) #smaller case
 #input:  a "albert street" (2,1) (1,2,2.3) #street overlap
 
-#所以，重叠的街道，所有重合的顶点都是交叉点？
-#我之前以为重叠的街道只算首尾的点才是交叉点呢）（可是万一只是线段重合，但是顶点并没有重合呢？？）
 #please format the float as 0.2f
 #denominator == 0, is it exactly 0?

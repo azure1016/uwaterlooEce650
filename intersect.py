@@ -57,7 +57,7 @@ def intersect_on_segment (l1, l2, new_index):
         #coincident
         if (x1-x2) * (y2-y3) == (x2-x3) * (y1-y2):
             if l1 >= l2:
-                return [l2.src,l2,dst]
+                return [l2.src,l2.dst]
             elif l2 >= l1:
                 return [l1.src,l1.dst]
             else:

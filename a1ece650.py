@@ -89,16 +89,16 @@ class Street(object):
     def get_coordinates(self,str_read):
         # return {"A":(a,b),"B":(c,d)}
         cord =  re.findall(r'(\(\s*\d+\s*,\s*\d+\s*\)\s*)',str_read) 
-        try:
+        #try:
             #might have invalid input so that can't eval
-            vertices = [] 
-            for val in cord:
-                cor = eval(val)
-                p = Point(cor[0],cor[1],uniq_v_index)
-                self.point_history.append(p)
-                vertices.append(p) 
-                uniq_v_index = uniq_v_index + 1
-            return vertices
+        vertices = []
+        for val in cord:
+            cor = eval(val)
+            p = Point(cor[0],cor[1],uniq_v_index)
+            self.point_history.append(p)
+            vertices.append(p)
+            uniq_v_index = uniq_v_index + 1
+        return vertices
         #except exception1:
             #pass# for now
 
@@ -209,7 +209,15 @@ class Street(object):
 #                         e2 = st_j[n]
 #                         e1_seg = Line(Point(e1[0],e1[1]),Point())
                         
-
+# try:
+ns = Street()
+print "please input the command:"
+while True:
+    std_read = sys.stdin.readline()#[:-1] #discard '\n' at the end
+    #I heard that stdin will get a \n
+    #std_read = a "King Street" (2,1) (1.2,2.3) (4.2,2)
+    if ns.isValidCmd(std_read):
+             ns.process_cmd(std_read)
 
 
 
