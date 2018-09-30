@@ -1,9 +1,3 @@
-# -*- coding: UTF-8 -*-
-from __future__ import division
-cor = {"st1":['(1,2)','(2,3)','(3,4)'],
-	  "st2":['(2,2)','(4,3)','(2,4)'],
-	"st3":['(1,3)','(3,3)','(3,8)']}
-
 class Point(object):
     def __init__ (self, x, y, index):
         self.x = float(x)
@@ -20,7 +14,16 @@ class Point(object):
 
     def __le__ (self, other):
         return self.x <= other.x
-	
+
+    def is_in(self, p, some_list):
+        for i in some_list:
+            if i == p:
+                return True
+        return False
+
+    # def search_index(self,other):
+    #     for
+
 class Line(object):
     intersections = []
     def __init__ (self, src, dst):
@@ -37,15 +40,16 @@ class Line(object):
 
     def __eq__ (self,other):
         return self.src == other.src and self.dst == other.src
-	
-def intersect_on_segment (l1, l2,new_index):
+
+#return a Point object or None
+def intersect_on_segment (l1, l2, new_index):
     x1, y1 = l1.src.x, l1.src.y
     x2, y2 = l1.dst.x, l1.dst.y
     x3, y3 = l2.src.x, l2.src.y
     x4, y4 = l2.dst.x, l2.dst.y
     #to determine whether the two lines would intersect on the 2 segments
-    t_up = (x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)
-    u_up = -(x1-x2)*(y1-y3) + (y1-y2)*(x1-x3)
+    t1_up = (x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)
+    t2_up = (x1-x2)*(y1-y3) - (y1-y2)*(x1-x3)
     denominator = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
     #if they are parallel or coincident:
     # this condition might come across computational problems
@@ -75,11 +79,18 @@ def intersect_on_segment (l1, l2,new_index):
             return [Point(xcoor, ycoor, new_index)]
         else:
             return None
-		
-p1,p2 = Point(1,0,0), Point(1,3,1)
-p3,p4 = Point(0,1,3), Point(3,1,2)
 
-L1,L2 = Line(p1,p2), Line(p3,p4)
-l = intersect_on_segment(L1,L2,4)
-for i in l:
-    print i
+
+    
+
+if __name__ == '__main__':
+    p1 = Point (0, 1,0)
+    p2 = Point (3, 1,1)
+    p3 = Point (1, 0,2)
+    p4 = Point (1, 8,3)
+
+    l1 = Line (p1, p2)
+    l2 = Line (p3, p4)
+    print 'Intersect of', l1, 'with', l2, 'is:' 
+    for i in intersect_on_segment(l1, l2,4):
+        print i
