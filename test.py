@@ -1,3 +1,4 @@
+import a1ece650
 # try:
 #    # str_read = stdin("enter your command: a add c change r remove g output graph:")
 #     str_read = 'a "Weber Street" (12,20) (2,1) (3,4)'
@@ -32,13 +33,13 @@
 try: 
     ns = Street()
     while True:
-        #std_read = stdin("please input the command:")
+        print "please input the command:",
+        std_read = sys.stdin.readline()[:-1] #discard '\n' at the end
         #I heard that stdin will get a \n
-        std_read = a "King Street" (2,1) (1.2,2.3) (4.2,2)       
+        #std_read = a "King Street" (2,1) (1.2,2.3) (4.2,2)       
         if ns.isValidCmd(std_read):
-            for i in range(0,2):
-                if ns.flags[i] == 1:
-
+            ns.process_cmd(std_read)
+            
 #test case:
 #input1: a "King Street" (2,1) (1.2,2.3) (4.2,2) #float match
 #input2: a "King street" (3,4) (4,5) #add an existing street
