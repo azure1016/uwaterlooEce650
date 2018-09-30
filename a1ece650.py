@@ -77,7 +77,7 @@ class Street(object):
     
     def get_coordinates(self,str_read):
         # return {"A":(a,b),"B":(c,d)}
-        cord =  re.findall(r'(\(\d+,\d+\)\s*)',str_read) 
+        cord =  re.findall(r'(\(\s*\d+\s*,\s*\d+\s*\)\s*)',str_read) 
         try:
             #might have invalid input so that can't eval
             vertices = [] 

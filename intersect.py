@@ -33,7 +33,7 @@ class Line(object):
         return self.src == other.src and self.dst == other.src
 
 #return a Point object or None
-def intersect_on_segment (l1, l2，new_index):
+def intersect_on_segment (l1, l2, new_index):
     x1, y1 = l1.src.x, l1.src.y
     x2, y2 = l1.dst.x, l1.dst.y
     x3, y3 = l2.src.x, l2.src.y
@@ -57,10 +57,10 @@ def intersect_on_segment (l1, l2，new_index):
         else:
             return None
     else:
-        t1 = t1_up / denominator
-        t2 = t2_up / denominator
+        t = t_up / denominator
+        u = u_up / denominator
         #if the intersection is on both segments
-        if 0 <= t1 and t1 <= 1 and 0 <= t2 and t2 <= 1:
+        if 0 <= t and t <= 1 and 0 <= u and u <= 1:
             xnum = ((x1*y2 - y1*x2)*(x3-x4) - (x1-x2)*(x3*y4 - y3*x4))
             xcoor =  xnum / denominator
 
@@ -75,11 +75,13 @@ def intersect_on_segment (l1, l2，new_index):
     
 
 if __name__ == '__main__':
-    p1 = Point (1, 4)
-    p2 = Point (5, 8)
-    p3 = Point (5, 6)
-    p4 = Point (3, 8)
+    p1 = Point (0, 1,0)
+    p2 = Point (3, 1,1)
+    p3 = Point (1, 0,2)
+    p4 = Point (1, 8,3)
 
     l1 = Line (p1, p2)
     l2 = Line (p3, p4)
-    print 'Intersect of', l1, 'with', l2, 'is', intersect(l1, l2)
+    print 'Intersect of', l1, 'with', l2, 'is:' 
+    for i in intersect(l1, l2):
+        print i
