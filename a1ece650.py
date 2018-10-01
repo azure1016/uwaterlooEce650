@@ -2,9 +2,9 @@
 # -*- coding: <utf-8> -*-
 from __future__ import division
 import sys
-import matplotlib
+#import matplotlib
 import re
-import numpy as np
+#import numpy as np
 #import pylab as pl
 #from matplotlib import collections  as mc
 import intersect
@@ -74,14 +74,14 @@ class Street(object):
 
     def text_graph(self):
         self.process_graph()
-        sys.stdout("V = {")
+        sys.stdout.write("V = {")
         for v in self.valid_points:
-            print v+"\n"
-        print "}"
-        print "E = {"
+            sys.stdout.write(v+"\n")
+        sys.stdout.write("}")
+        sys.stdout.write("E = {")
         for e in self.valid_edges:
-            print e+"\n"
-        print "}"
+            sys.stdout.write(e+"\n")
+        sys.stdout.write("}")
 
     # def flags_clear(self):
     #     self.flags = [0,0,0]
@@ -281,7 +281,7 @@ def intersect_on_segment (l1, l2,new_index):
                         
 # try:
 ns = Street()
-print "please input the command:"
+sys.stdout.write("please input the command:")
 while True:
     std_read = sys.stdin.readline()#[:-1] #discard '\n' at the end
     #I heard that stdin will get a \n
