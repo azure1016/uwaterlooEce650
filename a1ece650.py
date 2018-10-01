@@ -5,8 +5,8 @@ import sys
 import matplotlib
 import re
 import numpy as np
-import pylab as pl
-from matplotlib import collections  as mc
+#import pylab as pl
+#from matplotlib import collections  as mc
 import intersect
 
 #you can use py3to2 to change python3 to python2
@@ -36,7 +36,7 @@ class Street(object):
 
     def add_street(self,street_name,vi_l,ei_l):
         #vi_l = get_coordinates(),ei_l = get_lines()
-        if self.vb_dc_l.has_key[street_name.upper()] == False:
+        if self.vb_dc_l.has_key(street_name.upper()) == False:
             self.vb_dc_l[street_name.upper()] = vi_l
             self.eb_dc_l[street_name.upper()] = ei_l
             #self.edges_list.add(ei_l)
@@ -44,14 +44,14 @@ class Street(object):
             sys.stdout("You added a street that has existed!")
 
     def delete_street(self,street_name):
-        if self.vb_dc_l.has_key[street_name.upper()] == False:
+        if self.vb_dc_l.has_key(street_name.upper()) == False:
             del self.vb_dc_l[street_name.upper()]
             del self.eb_dc_l[street_name.upper()]
         else:
             sys.stdout("The street you want to delete doesn't even exist!")
 
     def change_street(self,street_name,newvi_l,newei_l):
-        if self.vb_dc_l.has_key[street_name.upper()] == False:
+        if self.vb_dc_l.has_key(street_name.upper()) == False:
             self.vb_dc_l[street_name.upper()] = newvi_l
             self.eb_dc_l[street_name.upper()] = newei_l
         else:
@@ -94,10 +94,10 @@ class Street(object):
         vertices = []
         for val in cord:
             cor = eval(val)
-            p = Point(cor[0],cor[1],uniq_v_index)
+            p = Point(cor[0],cor[1],self.uniq_v_index)
             self.point_history.append(p)
             vertices.append(p)
-            uniq_v_index = uniq_v_index + 1
+            self.uniq_v_index = self.uniq_v_index + 1
         return vertices
         #except exception1:
             #pass# for now
@@ -112,18 +112,18 @@ class Street(object):
 
     def get_lines(self,vi_l):
         #vi_l is a dictionary. return a list:[(1,2),(2,3),(3,4)]
-        for v in self.vb_dc_l.values():
+        for k, v in self.vb_dc_l.items():
             for i in range(0,len(v)-2):
                 l = Line(v[i],v[i+1])
-                self.eb_dc_l[v.get_key()].append(l)
+                self.eb_dc_l[k].append(l)
 
     def process_cmd(self,str_read):
         #cmd = re.search(r'^(\s)*[ac]\s+"((\w+\s*)+)"\s+(\(.*?\)\s*)+',str_read)
-        self.flags_clear()
+        #self.flags_clear()
         cmd_ac = re.search(r'^\s*([ac])\s+".*?"\s+(\(.*?\)\s*)+$',str_read)
         if cmd_ac != None:
             vi_l = self.get_coordinates(str_read)
-            ei_l = self.get_edges(str_read)
+            ei_l = self.get_lines(str_read)
             str_list = cmd_ac.groups()
             if str_list[0] == "a":               
                 self.add_street(str_list[1],vi_l,ei_l)
@@ -181,7 +181,77 @@ class Street(object):
                                 for i in range(0,len(v_p)-2):
                                     self.valid_edges.append(Line(v_p[i],v_p[i+1]))
     
- 
+class Point(object):
+    def __init__ (self, x, y, index):
+        self.x = float(x)
+        self.y = float(y)
+        self.index = index
+    def __str__ (self):
+        return str(self.index)+':(' + str(self.x) + ',' + str(self.y) + ')'
+
+    def __eq__ (self, other):
+        return self.x == other.x and self.y == other.y
+
+    def __ge__ (self, other):
+        return self.x >= other.x
+
+    def __le__ (self, other):
+        return self.x <= other.x
+    
+class Line(object):
+    intersections = []
+    def __init__ (self, src, dst):
+        self.src = src
+        self.dst = dst
+
+    def __str__ (self):
+        return "<"+str(self.src.index) + ',' + str(self.dst.index)+">"
+
+    def __ge__ (self,other):
+        ge1 = self.src < other.src and self.src < other.dst and self.dst > other.src and self.dst > other.dst
+        ge2 = self.dst < other.src and self.dst < other.dst and self.src > other.src and self.dst > other.dst
+        return any([ge1, ge2])
+
+    def __eq__ (self,other):
+        return self.src == other.src and self.dst == other.src
+    
+def intersect_on_segment (l1, l2,new_index):
+    x1, y1 = l1.src.x, l1.src.y
+    x2, y2 = l1.dst.x, l1.dst.y
+    x3, y3 = l2.src.x, l2.src.y
+    x4, y4 = l2.dst.x, l2.dst.y
+    #to determine whether the two lines would intersect on the 2 segments
+    t_up = (x1-x3)*(y3-y4) - (y1-y3)*(x3-x4)
+    u_up = -(x1-x2)*(y1-y3) + (y1-y2)*(x1-x3)
+    denominator = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+    #if they are parallel or coincident:
+    # this condition might come across computational problems
+    if denominator == 0: 
+        #coincident
+        if (x1-x2) * (y2-y3) == (x2-x3) * (y1-y2):
+            if l1 >= l2:
+                return [l2.src,l2.dst]
+            elif l2 >= l1:
+                return [l1.src,l1.dst]
+            else:
+                return None
+        #parallel        
+        else:
+            return None
+    else:
+        t = t_up / denominator
+        u = u_up / denominator
+        #if the intersection is on both segments
+        if 0 <= t and t <= 1 and 0 <= u and u <= 1:
+            xnum = ((x1*y2 - y1*x2)*(x3-x4) - (x1-x2)*(x3*y4 - y3*x4))
+            xcoor =  xnum / denominator
+
+            ynum = (x1*y2 - y1*x2)*(y3-y4) - (y1-y2)*(x3*y4-y3*x4)
+            ycoor = ynum / denominator
+
+            return [Point(xcoor, ycoor, new_index)]
+        else:
+            return None
 
 # class VertexCover(object):
 #     valid_vertices = {}
@@ -216,8 +286,8 @@ while True:
     std_read = sys.stdin.readline()#[:-1] #discard '\n' at the end
     #I heard that stdin will get a \n
     #std_read = a "King Street" (2,1) (1.2,2.3) (4.2,2)
-    if ns.isValidCmd(std_read):
-             ns.process_cmd(std_read)
+    #if ns.isValidCmd(std_read):
+    ns.process_cmd(std_read)
 
 
 
