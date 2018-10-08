@@ -38,12 +38,13 @@
     <session id="685475833">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.14" value="2" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -80,13 +81,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/a1ece650.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2382">
-              <caret line="127" column="55" selection-start-line="127" selection-start-column="55" selection-end-line="127" selection-end-column="55" />
+            <state relative-caret-position="-2592">
+              <caret line="121" column="55" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
               <folding>
-                <element signature="e#44#75#0" expanded="true" />
-                <marker date="1538538402000" expanded="true" signature="3050:3059" ph="..." />
-                <marker date="1538538402000" expanded="true" signature="7953:7958" ph="..." />
-                <marker date="1538538402000" expanded="true" signature="9609:9614" ph="..." />
+                <element signature="e#1#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -420,7 +418,7 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4973262" visible="true" weight="0.28664497" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4973262" visible="true" weight="0.2923453" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5026738" side_tool="true" weight="0.28094462" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -462,12 +460,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/a1ece650.py</url>
-          <line>46</line>
+          <line>40</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/a1ece650.py</url>
-          <line>168</line>
+          <line>162</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
@@ -477,13 +475,10 @@
     <entry file="file://$PROJECT_DIR$/test_intersect" />
     <entry file="file://$PROJECT_DIR$/a1ece650.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2382">
-          <caret line="127" column="55" selection-start-line="127" selection-start-column="55" selection-end-line="127" selection-end-column="55" />
+        <state relative-caret-position="-2592">
+          <caret line="121" column="55" selection-start-line="121" selection-start-column="55" selection-end-line="121" selection-end-column="55" />
           <folding>
-            <element signature="e#44#75#0" expanded="true" />
-            <marker date="1538538402000" expanded="true" signature="3050:3059" ph="..." />
-            <marker date="1538538402000" expanded="true" signature="7953:7958" ph="..." />
-            <marker date="1538538402000" expanded="true" signature="9609:9614" ph="..." />
+            <element signature="e#1#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -6,26 +6,11 @@ import sys
 # YOUR CODE GOES HERE
 class Street(object):
     vb_dc_l = {} 
-    #{
-    #"st2":[Point(3,4), Point(4,5)]
-    #}
-
-    eb_dc_l = {
-    #"st1":[l1,l2,l3]
-    #"st2":[l4,l5,l6]
-    }
+    eb_dc_l = {}
     valid_points = []
     valid_edges = []
     point_history = []
-    plot_base = {}
-    #flag for the four cmds
-    
     uniq_v_index = 0
-    uniq_st_index = 0
-
-    # def __init__(self,v_dc,e_l):
-    #     self.vb_dc_l.append(v_dc)
-    #     self.eb_dc_l.append(e_l)
 
     def add_street(self,street_name,vi_l,ei_l):
         #vi_l = get_coordinates(),ei_l = get_lines()
@@ -33,39 +18,22 @@ class Street(object):
         if self.vb_dc_l.has_key(stn) == False:
             self.vb_dc_l[stn] = vi_l
             self.eb_dc_l[stn] = ei_l
-            #self.edges_list.add(ei_l)
         else:
-            sys.stderr.write("Warning: invalid command: 'a' specified a street that has already existed \n")
-            #return
+            sys.stderr.write("Error: invalid command: 'a' specified a street that has already existed \n")
 
     def delete_street(self,street_name):
         if self.vb_dc_l.has_key(street_name.upper()) == True:
             del self.vb_dc_l[street_name.upper()]
             del self.eb_dc_l[street_name.upper()]
         else:
-            sys.stderr.write("Warning: invalid command:The street you want to delete doesn't even exist!\n")
+            sys.stderr.write("Error: invalid command:The street you want to delete doesn't even exist!\n")
 
     def change_street(self,street_name,newvi_l,newei_l):
         if self.vb_dc_l.has_key(street_name.upper()) == True:
             self.vb_dc_l[street_name.upper()] = newvi_l
             self.eb_dc_l[street_name.upper()] = newei_l
         else:
-            sys.stderr.write("Warning: invalid command:The street you want to change doesn't exist. Please check again.\n")
-
-    # def show_graph(self):
-    #     if len(self.vb_dc_l)>0:
-    #         for v_s in self.vb_dc_l.values(): #v_s is a line
-    #             self.plot_base.append(v_s)
-    #     else:
-    #         stdout("The graph is empty.")
-    #     if len(self.plot_base)>0:
-    #         c = np.array([(1, 0, 0, 1), (0, 1, 0, 1), (0, 0, 1, 1)])
-    #         lc = mc.LineCollection(plot_base, colors=c, linewidths=2)
-    #         fig, ax = pl.subplots()
-    #         ax.add_collection(lc)
-    #         ax.autoscale()
-    #         ax.margins(0.1)
-    #         pl.show()
+            sys.stderr.write("Error: invalid command:The street you want to change doesn't exist. Please check again.\n")
 
     def text_graph(self):
         self.process_graph()
@@ -81,12 +49,8 @@ class Street(object):
             sys.stdout.write(str(self.valid_edges[-1])+'\n')
         sys.stdout.write("}\n")
 
-    # def flags_clear(self):
-    #     self.flags = [0,0,0]
-    
     def get_coordinates(self,str_read):
         # return {"A":(a,b),"B":(c,d)}
-        #better use "match" rather than "findall"!!
         cord =  re.findall(r'(\(\s*[-+]?[0-9]*\.?[0-9]+\s*,\s*[-+]?[0-9]*\.?[0-9]+\s*\)\s*)',str_read)
         try:
             #might have invalid input so that can't eval
@@ -105,7 +69,7 @@ class Street(object):
                 vertices.append(p)
             return vertices
         except:
-            sys.stderr.write("Warning: invalid coordinates")
+            sys.stderr.write("Error: invalid coordinates")
             return None
 
     def get_lines(self,vi_l):
@@ -118,7 +82,6 @@ class Street(object):
         return ei_l
 
     def process_cmd(self,str_read):
-        #cmd = re.search(r'^(\s)*[ac]\s+"((\w+\s*)+)"\s+(\(.*?\)\s*)+',str_read)
         cmd_ac = re.search(r'\s*([ac])\s+"([a-zA-Z\s]+)"\s+(\(\s*[-+]?[0-9]*\.?[0-9]+\s*,\s*[-+]?[0-9]*\.?[0-9]+\s*\)\s*)+',str_read)
         if cmd_ac != None and cmd_ac.group(0) == str_read:
             vi_l = self.get_coordinates(str_read)
@@ -131,15 +94,11 @@ class Street(object):
         else:
             cmd_r = re.search(r'^\s*[r]\s+"(.*?)"\s*$',str_read)
             if cmd_r != None:
-                #street_name = re.sub(r'\"\s+',"\"",cmd_r.group(2))
-                #street_name = 
                 self.delete_street(cmd_r.group(1))
-                #return true
             else:
                 cmd_g = re.search(r'^\s*g\s*$',str_read)
                 if cmd_g != None:
                     self.text_graph()
-                    #return True
                 else:
                     sys.stderr.write("Invalid command: no match for the line. \n")
 
@@ -161,7 +120,6 @@ class Street(object):
                     for l1 in self.eb_dc_l[i]:
                         for l2 in self.eb_dc_l[j]:
                             p_l = intersect_on_segment(l1,l2,self.uniq_v_index)
-                            #when no valid point found,return a none object rather than a list?
                             if p_l != None:
                                 for p in p_l:
                                     if not p.is_in(self.point_history):# a brand new
@@ -175,7 +133,7 @@ class Street(object):
                                     self.add_if_not_in([p,l1.src,l1.dst,l2.src,l2.dst],self.valid_points)
                                     self.add_if_not_in([p],l1.intersections)
                                     self.add_if_not_in([p],l2.intersections)
-                                #if p_l!=None, then you can expect valid edges
+        #if p_l!=None, then you can expect valid edges
         for i_i in self.eb_dc_l.keys():
             for l_i in self.eb_dc_l[i_i]:
                 if len(l_i.intersections)>0: #at this time, l2 has been compared with all the lines
@@ -249,7 +207,6 @@ def intersect_on_segment (l1, l2,new_index):
     u_up = -(x1-x2)*(y1-y3) + (y1-y2)*(x1-x3)
     denominator = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
     #if they are parallel or coincident:
-    # this condition might come across computational problems
     if denominator == 0: 
         #coincident
         if (x1-x2) * (y2-y3) == (x2-x3) * (y1-y2):
@@ -280,18 +237,20 @@ def intersect_on_segment (l1, l2,new_index):
 
 def main():
     ### YOUR MAIN CODE GOES HERE
-    ns = Street()
-    sys.stdout.write("please input the command:")
+    try:
+        ns = Street()
+        sys.stdout.write("please input the command:")
     ### sample code to read from stdin.
     ### make sure to remove all spurious print statements as required
     ### by the assignment
-    while True:
-        line = sys.stdin.readline()
-        if line == '':
-            break
-        print 'read a line:', line
-        ns.process_cmd(line)
-
+        while True:
+            line = sys.stdin.readline()
+            if line == '':
+                break
+            print 'read a line:', line
+            ns.process_cmd(line)
+    except exception1:
+        sys.stderr.write("Error detected. Please double-check your input!")
     print 'Finished reading input'
     # return exit code 0 on successful termination
     sys.exit(0)
