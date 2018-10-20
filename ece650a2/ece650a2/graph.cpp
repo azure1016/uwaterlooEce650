@@ -92,6 +92,7 @@ Graph::~Graph(){
     delete graph;
     graph = nullptr;
 }
+
 Vertex::Vertex(){
     
 }
