@@ -1,9 +1,0 @@
-cmake_minimum_required(VERSION 2.8)
-project(a2ece650)
-
-set(CMAKE_CXX_STANDARD 11)
-set (CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
-set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
-
-add_executable(a2-ece650 ece650a2/ece650a2/a2-ece650.cpp)
-add_executable(graph ece650a2/ece650a2/graph.cpp)

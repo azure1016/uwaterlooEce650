@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/d347wang/a1ece650/a1ece650/ece650a2/ece650a2/a2-ece650.cpp
+string
+-
+iostream
+-
+graph.hpp
+/home/d347wang/a1ece650/a1ece650/ece650a2/ece650a2/graph.hpp
+
+/home/d347wang/a1ece650/a1ece650/ece650a2/ece650a2/graph.hpp
+stdio.h
+-
+iostream
+-
+

@@ -10,7 +10,7 @@
 //#include <iostream>
 
 bool IsBetween(int x, int upper, int lower = 0){
-    if(x<=upper & x>=lower)
+    if((x<=upper) & (x>=lower))
         return true;
     else return false;
 }
