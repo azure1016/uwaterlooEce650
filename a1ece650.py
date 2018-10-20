@@ -100,7 +100,7 @@ class Street(object):
                 if cmd_g != None:
                     self.text_graph()
                 else:
-                    sys.stderr.write("Invalid command: no match for the line. \n")
+                    sys.stderr.write("Error: invalid command: no match for the line. \n")
 
     def add_if_not_in(self,some_list,some_storage):
         for i in some_list:
@@ -239,19 +239,14 @@ def main():
     ### YOUR MAIN CODE GOES HERE
     try:
         ns = Street()
-        sys.stdout.write("please input the command:")
-    ### sample code to read from stdin.
-    ### make sure to remove all spurious print statements as required
-    ### by the assignment
         while True:
             line = sys.stdin.readline()
             if line == '':
                 break
-            print 'read a line:', line
             ns.process_cmd(line)
     except exception1:
         sys.stderr.write("Error detected. Please double-check your input!")
-    print 'Finished reading input'
+    # print 'Finished reading input'
     # return exit code 0 on successful termination
     sys.exit(0)
 
