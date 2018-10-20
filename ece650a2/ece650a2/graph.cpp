@@ -30,14 +30,14 @@ Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
     if(isValidV){
         this->verticesNum = stoi(m_v[1]);
         //if there exist a previous graph object, you have to delete it!
-        if (graph != nullptr){
-            delete graph;
-            graph = nullptr;
-        }
-        if(visited != nullptr){
-            delete visited;
-            visited = nullptr;
-        }
+//        if (graph != nullptr){
+//            delete graph;
+//            graph = nullptr;
+//        }
+//        if(visited != nullptr){
+//            delete visited;
+//            visited = nullptr;
+//        }
         graph = new Vertex[this->verticesNum];
         visited = new bool[verticesNum]();//initialize the array with false
         for(int i = 0; i < verticesNum; i++){
