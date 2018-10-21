@@ -14,6 +14,7 @@ bool IsBetween(int x, int upper, int lower = 0){
         return true;
     else return false;
 }
+//Graph::Graph(){}
 
 Graph::Graph(int r):verticesNum(r){}
 
@@ -29,26 +30,26 @@ Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
     bool isValidE = std::regex_search(e_cmd,re_e);
     if(isValidV){
         this->verticesNum = stoi(m_v[1]);
-        //if there exist a previous graph object, you have to delete it!
-//        if (graph != nullptr){
-//            delete graph;
-//            graph = nullptr;
-//        }
-//        if(visited != nullptr){
-//            delete visited;
-//            visited = nullptr;
-//        }
-        graph = new Vertex[this->verticesNum];
-        visited = new bool[verticesNum]();//initialize the array with false
         for(int i = 0; i < verticesNum; i++){
-            graph[i].idx = i;
+            //graph[i] = Vertex(i);
+//            graph[i].idx = i;
+//            graph[i].dist = INF;
+//            graph[i].next = nullptr;
+            visited[i] = false;
         }
         if(isValidE){
             for( ; it_e != end; it_e++){
                 int v_src = stoi(it_e->str(1));
                 int v_dst = stoi(it_e->str(2));
                 if(IsBetween(v_src, verticesNum) && IsBetween(v_dst,verticesNum)){
-                    graph[v_src].Insert(v_dst);
+                    Vertex src = Vertex(v_src);
+                    Vertex dst = Vertex(v_dst);
+                    src.adjacentVs.push_back(&dst);
+                    dst.adjacentVs.push_back(&src);
+                    graph.push_back(src);
+                    graph.push_back(dst);
+                    //graph[v_src].Insert(&graph[v_dst]);
+                    //graph[v_dst].Insert(&graph[v_src]);
                 }
             }
         }
@@ -65,17 +66,54 @@ Vertex* Graph::FirstAdjVertex(int idx){
     return 0;
 }
 
+void Graph::Reset(){
+    for(int i = 0; i < verticesNum; i++){
+        visited[i] = false;
+        graph[i].dist = INF;
+        graph[i].path = nullptr;
+    }
+}
 
 bool Graph::BFS(int headVer){
-    if(this->visited[headVer] != false){
-        std::queue<Vertex> pa;
+    Reset();
+    graph[headVer].dist = 0;
+    std::queue<Vertex*> pa;
+    pa.push(&graph[headVer]);
+    visited[headVer] = true;
+    Vertex* tmp = nullptr;
+    while(!pa.empty()){
+        tmp = pa.front();
+        pa.pop();
+        if(tmp->next != nullptr){
+            Vertex* n = &graph[tmp->next->idx];
+            while((n != nullptr) && !visited[n->idx]){
+                visited[n->idx] = true;
+                pa.push(n);
+                if(n->dist == INF){
+                    n->dist = tmp->dist + 1;
+                    n->path = tmp;
+                }
+                n = n->next;
+            }
+        }
     }
+    
     return true;
 }
 
+void Graph::PrintPath(int src, int dst){
+    BFS(src);
+    Vertex* n = graph[dst].path;
+    if(n != nullptr){
+        PrintPath(n->idx, dst);
+    }
+    std::cout<<dst<<std::endl;
+}
+
+
 Graph::~Graph(){
     //delete graph;
-    if(graph != NULL){
+    //if(graph != NULL){
         int len = sizeof(graph)/sizeof(graph[0]);
         for(int i = 0; i < len; i++){
 //            while(graph[i]){
@@ -88,23 +126,29 @@ Graph::~Graph(){
                 p = n;
             }
         }
-    }
-    delete graph;
-    graph = nullptr;
+    //}
+    //delete graph;
+    //graph = nullptr;
 }
 
-Vertex::Vertex(){
-    
-}
+Vertex::Vertex(){}
 
-Vertex::Vertex(int idx, Vertex* next){
+//Vertex::Vertex(int idx){
+//    idx = idx;
+//    dist = INF;
+//    next = nullptr;
+//    path = nullptr;
+//}
+
+Vertex::Vertex(int idx, int dist, Vertex* next){
     this->idx = idx;
+    this->dist = dist;
     this->next = next;
 }
 
 void Vertex::Insert(int idx){
-    Vertex new_v = Vertex(idx, this->next);
-    this->next = &new_v;
+    
+    //this->next = &new_v;
 }
 
 void Vertex::Insert(Vertex *new_v){

@@ -9,6 +9,6 @@ int main(){
     std::string v="V 15";
     std::string e = "E {<2,6>,<2,8>,<2,5>,<6,5>,<5,8>,<6,10>,<10,8>}";
     Graph g = Graph(v, e);
-    
+    g.PrintPath(2,10);
     return 0;
 }
