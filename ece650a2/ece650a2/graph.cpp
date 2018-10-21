@@ -7,14 +7,11 @@
 #include <regex>
 #include <queue>
 
-//#include <iostream>
-
 bool IsBetween(int x, int upper, int lower = 0){
     if((x<=upper) & (x>=lower))
         return true;
     else return false;
 }
-//Graph::Graph(){}
 
 Graph::Graph(int r):verticesNum(r){}
 
@@ -31,25 +28,15 @@ Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
     if(isValidV){
         this->verticesNum = stoi(m_v[1]);
         for(int i = 0; i < verticesNum; i++){
-            //graph[i] = Vertex(i);
-//            graph[i].idx = i;
-//            graph[i].dist = INF;
-//            graph[i].next = nullptr;
-            visited[i] = false;
+            graph.push_back(new Vertex(i));
         }
         if(isValidE){
             for( ; it_e != end; it_e++){
                 int v_src = stoi(it_e->str(1));
                 int v_dst = stoi(it_e->str(2));
                 if(IsBetween(v_src, verticesNum) && IsBetween(v_dst,verticesNum)){
-                    Vertex src = Vertex(v_src);
-                    Vertex dst = Vertex(v_dst);
-                    src.adjacentVs.push_back(&dst);
-                    dst.adjacentVs.push_back(&src);
-                    graph.push_back(src);
-                    graph.push_back(dst);
-                    //graph[v_src].Insert(&graph[v_dst]);
-                    //graph[v_dst].Insert(&graph[v_src]);
+                    graph.at(v_src)->adjacentVs.push_back(graph.at(v_dst));
+                    graph.at(v_dst)->adjacentVs.push_back(graph.at(v_src));
                 }
             }
         }
@@ -57,55 +44,46 @@ Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
     }
 }
 
-Vertex* Graph::FirstAdjVertex(int idx){
-    for(Vertex* j = this->graph[idx].next; j != NULL; j = j->next){
-        if(visited[j->idx] == false)
-            return j;
-        else continue;
-    }
-    return 0;
-}
-
 void Graph::Reset(){
     for(int i = 0; i < verticesNum; i++){
-        visited[i] = false;
-        graph[i].dist = INF;
-        graph[i].path = nullptr;
+        graph.at(i)->visited = false;
+        graph.at(i)->dist = INF;
+        graph.at(i)->path = nullptr;
     }
 }
 
 bool Graph::BFS(int headVer){
     Reset();
-    graph[headVer].dist = 0;
+    graph.at(headVer)->dist = 0;
     std::queue<Vertex*> pa;
-    pa.push(&graph[headVer]);
-    visited[headVer] = true;
+    pa.push(graph.at(headVer));
+    graph.at(headVer)->visited = true;
     Vertex* tmp = nullptr;
     while(!pa.empty()){
         tmp = pa.front();
         pa.pop();
-        if(tmp->next != nullptr){
-            Vertex* n = &graph[tmp->next->idx];
-            while((n != nullptr) && !visited[n->idx]){
-                visited[n->idx] = true;
-                pa.push(n);
-                if(n->dist == INF){
-                    n->dist = tmp->dist + 1;
-                    n->path = tmp;
+        if(tmp->adjacentVs.size() != 0 ){
+            for(int i = 0; i < tmp->adjacentVs.size(); i++){
+                Vertex* adjV = tmp->adjacentVs.at(i);
+                if(!adjV->visited){
+                    adjV->visited = true;
+                    if(adjV->dist == INF){
+                        adjV->dist = tmp->dist + 1;
+                        adjV->path = tmp;
+                    }
+                    pa.push(adjV);
                 }
-                n = n->next;
             }
         }
-    }
-    
+    }    
     return true;
 }
 
 void Graph::PrintPath(int src, int dst){
-    BFS(src);
-    Vertex* n = graph[dst].path;
+    //BFS(src);
+    Vertex* n = graph.at(dst)->path;
     if(n != nullptr){
-        PrintPath(n->idx, dst);
+        PrintPath(src,n->idx);
     }
     std::cout<<dst<<std::endl;
 }
@@ -114,18 +92,18 @@ void Graph::PrintPath(int src, int dst){
 Graph::~Graph(){
     //delete graph;
     //if(graph != NULL){
-        int len = sizeof(graph)/sizeof(graph[0]);
-        for(int i = 0; i < len; i++){
-//            while(graph[i]){
-//                Vertex* n = graph[i].next;
+//        int len = sizeof(graph)/sizeof(graph[0]);
+//        for(int i = 0; i < len; i++){
+////            while(graph[i]){
+////                Vertex* n = graph[i].next;
+////            }
+//            Vertex* p = &graph[i];
+//            while(p){
+//                Vertex* n = p->next;
+//                delete p;
+//                p = n;
 //            }
-            Vertex* p = &graph[i];
-            while(p){
-                Vertex* n = p->next;
-                delete p;
-                p = n;
-            }
-        }
+//        }
     //}
     //delete graph;
     //graph = nullptr;
@@ -133,27 +111,11 @@ Graph::~Graph(){
 
 Vertex::Vertex(){}
 
-//Vertex::Vertex(int idx){
-//    idx = idx;
-//    dist = INF;
-//    next = nullptr;
-//    path = nullptr;
-//}
-
-Vertex::Vertex(int idx, int dist, Vertex* next){
+Vertex::Vertex(int idx, int dist, bool visited, Vertex* path){
     this->idx = idx;
     this->dist = dist;
-    this->next = next;
-}
-
-void Vertex::Insert(int idx){
-    
-    //this->next = &new_v;
-}
-
-void Vertex::Insert(Vertex *new_v){
-    new_v->next = this->next;
-    this->next = new_v;
+    this->path = path;
+    this->visited = false;
 }
 
 Vertex::~Vertex(){
