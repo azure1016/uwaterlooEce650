@@ -105,8 +105,9 @@ void Graph::PrintPath(int src, int dst){
             return;
         }
         std::reverse(path.begin(), path.end());
-        for(auto i = path.begin(); i != path.end(); i++)
-            std::cout<<*i<<std::endl;
+        for(auto i = path.begin(); i != path.end()-1; i++)
+            std::cout<<*i<<"-";
+        std::cout<<*(path.end()-1)<<std::endl;
     }
     else throw "Error: invalid vertex name!\n";
 }

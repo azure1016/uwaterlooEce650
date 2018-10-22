@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     Graph* g3 = NULL;
     string v3,e3,s3;
-    while(true){
+    while(!cin.eof()){
         getline(cin,v3);
         if(v3 != ""){
             if(v3[0] == 'V'){
