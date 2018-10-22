@@ -1,1 +1,1 @@
-/usr/bin/c++  -std=c++11 -Wall   -rdynamic CMakeFiles/a2-ece650.dir/a2-ece650.cpp.o  -o a2-ece650 libgraph.a 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -std=c++11 -Wall  -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/a2-ece650.dir/a2-ece650.cpp.o  -o a2-ece650 libgraph.a 

@@ -1,21 +1,53 @@
-//#include "regex.hpp"
-//#include <regex>
 #include <string>
 #include <iostream>
 #include "graph.hpp"
 using namespace std;
 
 int main(){
-    std::string v1="V 15";
-    std::string e1 = "E {<2,6>,<2,8>,<2,5>,<6,5>,<5,8>,<6,10>,<10,8>}";
-    std::string v2="V 5";
-    std::string e2 = "E {<0,2>,<2,1>,<2,3>,<3,4>,<4,1>}";
-
-    Graph g = Graph(v1, e1);
-    Graph g2 = Graph(v2,e2);
-    g.BFS(2);
-    g.PrintPath(2,10);
-    g2.BFS(4);
-    g2.PrintPath(4,0);
+    Graph* g3 = NULL;
+    string v3,e3,s3;
+    while(true){
+        getline(cin,v3);
+        if(v3 != ""){
+            if(v3[0] == 'V'){
+                getline(cin,e3);
+                if(e3[0] == 'E'){
+                    try{
+                        if(g3 != NULL) delete g3;
+                        g3 = new Graph(v3,e3);
+                        getline(cin,s3);
+                        if(s3[0] == 's'){
+                            int src =0, dst=0;
+                            g3->GetS(s3, src, dst);
+                            g3->BFS(src);
+                            g3->PrintPath(src,dst);
+                        }
+                    }
+                    catch(char const* i){
+                        std::cerr<<i;
+                    }
+                }
+            }
+            else if(g3 != NULL){
+                if(v3[0] == 's'){
+                    int src =0, dst=0;
+                    g3->GetS(v3, src, dst);
+                    try{
+                        g3->BFS(src);
+                        g3->PrintPath(src,dst);
+                    }
+                    catch(char const* i){
+                        std::cerr<<i;
+                    }
+                }
+                else std::cerr<<"Error: invalid input!\n"<<std::endl;
+            }
+            else{
+                std::cerr<<"Error: invalid input! Graph object is null!\n";
+            }
+        }
+        else
+            break;
+    }
     return 0;
 }

@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/d347wang/a1ece650/a1ece650/ece650a2/ece650a2/graph.cpp" "/home/d347wang/a1ece650/a1ece650/ece650a2/ece650a2/run-build/CMakeFiles/graph.dir/graph.cpp.o"
+  "/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/graph.cpp" "/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/run-build/CMakeFiles/graph.dir/graph.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

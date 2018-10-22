@@ -28,11 +28,13 @@ public:
 
 class Graph{
 public:
+    Graph();
     Graph(int r);
     Graph(const std::string& v_cmd, const std::string& e_cmd);//generate a list of vertex
     void Reset();
     bool BFS(int headVer);
     void PrintPath(int src, int dst);
+    void GetS(const std::string& s_cmd, int& src, int& dst);
     ~Graph();
     
 private:
