@@ -19,7 +19,6 @@ Graph::Graph(int r):verticesNum(r){}
 
 Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
     std::smatch m_v;
-    
     std::regex re_v("V\\s(\\d+)");
     std::regex re_e("E\\s\\{(<(\\d+),(\\d+)>,*)+\\}");
     std::regex re_coor("<(\\d+),(\\d+)>");
@@ -44,7 +43,6 @@ Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
             }
         }
         else throw "Error: invalid input!\n";
-        
     }
     else
         throw "Error: invalid input!\n";
@@ -123,23 +121,17 @@ void Graph::GetS(const std::string& s_cmd, int& src, int& dst){
     else throw "Error: invalid input!\n";
 }
 Graph::~Graph(){
-    //delete graph;
-    //if(graph != NULL){
-//        int len = sizeof(graph)/sizeof(graph[0]);
-//        for(int i = 0; i < len; i++){
-////            while(graph[i]){
-////                Vertex* n = graph[i].next;
-////            }
-//            Vertex* p = &graph[i];
-//            while(p){
-//                Vertex* n = p->next;
-//                delete p;
-//                p = n;
-//            }
-//        }
-    //}
-    //delete graph;
-    //graph = nullptr;
+    if(graph.size() != (uint)0){
+        int len = (int)graph.size();
+        for(int i = 0; i < len; i++){
+            Vertex* p = graph[i];
+            if(p){
+                delete p;
+                p = nullptr;
+            }
+        }
+    }
+    std::cout<<"graph destroy\n";
 }
 
 Vertex::Vertex(){}
@@ -151,6 +143,4 @@ Vertex::Vertex(int idx, int dist, bool visited, Vertex* path){
     this->visited = false;
 }
 
-Vertex::~Vertex(){
-    
-}
+Vertex::~Vertex(){}

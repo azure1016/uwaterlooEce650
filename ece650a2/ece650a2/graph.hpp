@@ -40,7 +40,6 @@ public:
 private:
     int verticesNum;
     std::vector<Vertex*> graph;
-
 };
 
 #endif /* graph_hpp */

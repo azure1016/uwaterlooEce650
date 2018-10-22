@@ -3,7 +3,7 @@
 #include "graph.hpp"
 using namespace std;
 
-int main(){
+int test(){
     Graph* g3 = NULL;
     string v3,e3,s3;
     while(!cin.eof()){
@@ -49,5 +49,14 @@ int main(){
         else
             break;
     }
+//    if(g3 != nullptr){
+//        delete g3;
+//        g3 = nullptr;
+//    }
     return 0;
+}
+
+int main(){
+    test();
+    std::cout<<"ends\n";
 }
