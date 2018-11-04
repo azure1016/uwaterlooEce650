@@ -5,12 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
 add_library(graph graph.hpp graph.cpp)
-#link_directories(graph)
-#include_directories(ece650a2/ece650a2/graph.hpp)
-#target_link_libraries( ${a2ece650} graph)
-#add_executable(a2-ece650 ece650a2/ece650a2/a2-ece650.cpp)
-#add_executable(graph ece650a2/ece650a2/graph.cpp)
-#add_executable(graph graph.cpp)
+
 add_executable(a2-ece650 a2-ece650.cpp)
 
 target_link_libraries(a2-ece650 PRIVATE graph)

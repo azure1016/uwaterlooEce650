@@ -7,6 +7,7 @@
 #include <regex>
 #include <queue>
 
+/// judge if an integer is between a certain range.
 bool IsBetween(int x, int upper, int lower = 0){
     if((x<=upper) & (x>=lower))
         return true;
@@ -17,6 +18,7 @@ Graph::Graph(){}
 
 Graph::Graph(int r):verticesNum(r){}
 
+///using input strings to generate graph directly
 Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
     std::smatch m_v;
     std::regex re_v("V\\s(\\d+)");
@@ -48,6 +50,7 @@ Graph::Graph(const std::string& v_cmd, const std::string& e_cmd){
         throw "Error: invalid input!\n";
 }
 
+///reset vertex information
 void Graph::Reset(){
     for(int i = 0; i < verticesNum; i++){
         graph.at(i)->visited = false;
@@ -56,6 +59,7 @@ void Graph::Reset(){
     }
 }
 
+///using BFS to find the path from source to destiny
 bool Graph::BFS(int headVer){
     if(IsBetween(headVer, verticesNum-1)){
         Reset();
@@ -89,6 +93,7 @@ bool Graph::BFS(int headVer){
     }
 }
 
+///after BFS, print the path from source to destiny
 void Graph::PrintPath(int src, int dst){
     if((IsBetween(src, verticesNum-1))&&(IsBetween(dst, verticesNum-1))){
         Vertex* n = graph.at(dst)->path;
@@ -98,7 +103,7 @@ void Graph::PrintPath(int src, int dst){
             path.push_back(n->idx);
             n = n->path;
         }
-        if(path.size() == (uint)1 || path.back() != src){
+        if(path.back() != src){
             throw "Error: there is no path from the source to the destiny!\n";
             return;
         }
@@ -110,6 +115,8 @@ void Graph::PrintPath(int src, int dst){
     else throw "Error: invalid vertex name!\n";
 }
 
+
+///parse the s command, get the indexes for source and destiny
 void Graph::GetS(const std::string& s_cmd, int& src, int& dst){
     std::regex re_s("s\\s(\\d+)\\s(\\d+)");
     std::smatch m_s;
@@ -120,6 +127,8 @@ void Graph::GetS(const std::string& s_cmd, int& src, int& dst){
     }
     else throw "Error: invalid input!\n";
 }
+
+///the destructor
 Graph::~Graph(){
     if(graph.size() != (uint)0){
         int len = (int)graph.size();
@@ -131,11 +140,13 @@ Graph::~Graph(){
             }
         }
     }
-    std::cout<<"graph destroy\n";
+    //std::cout<<"graph destroy\n";
 }
 
 Vertex::Vertex(){}
 
+
+///constructor for Vertex
 Vertex::Vertex(int idx, int dist, bool visited, Vertex* path){
     this->idx = idx;
     this->dist = dist;

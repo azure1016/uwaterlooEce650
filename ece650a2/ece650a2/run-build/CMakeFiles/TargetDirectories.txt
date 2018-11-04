@@ -1,4 +1,0 @@
-/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/run-build/CMakeFiles/rebuild_cache.dir
-/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/run-build/CMakeFiles/edit_cache.dir
-/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/run-build/CMakeFiles/a2-ece650.dir
-/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/run-build/CMakeFiles/graph.dir
