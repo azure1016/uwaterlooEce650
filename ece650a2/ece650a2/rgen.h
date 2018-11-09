@@ -45,7 +45,8 @@ public:
     
     void rgen(int st_num_max = 10, int edge_max = 5, int wait_sec = 5, int point_range = 20, int max_try = 25);
     
-    void rgen(int argc, char** argv);
+    int rgen(int argc, char** argv);
+    int r_gen();
     
     bool IsDupPt(int *arr);
     bool IsDupName(const std::vector<std::string> &history, const std::string& name);

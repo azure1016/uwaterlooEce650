@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
 #include <unistd.h>
@@ -39,7 +40,11 @@ RGen::RGen(){}
 
 bool RGen::IsDupPt(int *arr){
     for(auto i = pt_history.begin(); i != pt_history.end(); i++){
-        if((*arr == **i) && (*(arr+1) == *(*i+1))) return true;
+        std::cout << *arr << *(*i+1)<< *(arr+1) << std::endl;
+        std::cout << **i << std::endl;
+        bool b1 = (*arr == **i);
+        bool b2 = (*(arr+1) == *(*i+1));
+        if(b1 && b2) return true;
     }
     return false;
 }
@@ -135,7 +140,12 @@ std::string RGen::a_gen(int point_range, int edge_range){
 //    }
 //}
 
-void RGen::rgen(int argc, char** argv){
+int RGen::rgen(int argc, char** argv){
+    std::ifstream urandom("/dev/urandom");
+    if (urandom.fail()) {
+        std::cerr << "Error: cannot open /dev/urandom\n";
+        return 1;
+    }
     int st_num_max = 10;
     int edge_max = 5;
     int wait_sec = 5;
@@ -172,13 +182,17 @@ void RGen::rgen(int argc, char** argv){
         }
     }
     while(true){
-        int st_num = rand()%(st_num_max - 1) + 2;
+        //int st_num = rand()%(st_num_max - 1) + 2;
+        unsigned int num = 42;
+        urandom.read((char*)&num, sizeof(int));
+        int st_num = (int)num % (st_num_max-1) + 2;
+
         while (max_try > 0){
             if (st_num == 0){
                 std::cout<<"g"<<std::endl;
                 break;
             }
-            std::cout<<a_gen(point_range, edge_max);//this will be redirect to pipe
+            std::cout<<a_gen(point_range, edge_max)<<std::endl;//this will be redirect to pipe
             max_try--;
         }
         sleep((unsigned)wait_sec);
@@ -188,6 +202,38 @@ void RGen::rgen(int argc, char** argv){
 //        }
 //        name_history.clear();
     }
+    // close random stream
+    urandom.close();
+    return 0;
+}
+
+int RGen::r_gen(){
+    int st_num_max = 10;
+    int edge_max = 5;
+    int wait_sec = 5;
+    int point_range = 20;
+    int max_try = 25;
+    
+    std::string param = "";
+        while(true){
+            int st_num = rand()%(st_num_max - 1) + 2;
+            while (max_try > 0){
+                if (st_num == 0){
+                    std::cout<<"g"<<std::endl;
+                    break;
+                }
+                std::string line = a_gen(point_range, edge_max);
+                std::cout << line << std::endl;//this will be redirect to pipe
+                max_try--;
+            }
+            sleep((unsigned)wait_sec);
+            //        for (auto i = name_history.begin(); i != name_history.end(); i++){
+            //            std::cout<<"r "+*i<<std::endl;
+            //            //i = name_history.erase(i);//invalidation of iterator?
+            //        }
+            //        name_history.clear();
+    }
+    return 0;
 }
 
 //
@@ -230,3 +276,8 @@ void RGen::rgen(int argc, char** argv){
 //            return false;
 //    }
 //}
+int main(){
+    RGen r;
+    r.r_gen();
+    return 1;
+}

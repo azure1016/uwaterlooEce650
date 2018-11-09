@@ -1,0 +1,10 @@
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/install/strip.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/install.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/list_install_components.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/edit_cache.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/rebuild_cache.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/a3-ece650.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/install/local.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/a2-ece650.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/rgen.dir
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles/graph.dir

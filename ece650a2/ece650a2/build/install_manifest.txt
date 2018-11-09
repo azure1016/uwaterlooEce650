@@ -1,0 +1,3 @@
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/run/bin/a1ece650.py
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/run/bin/a2-ece650
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/run/bin/a3-ece650

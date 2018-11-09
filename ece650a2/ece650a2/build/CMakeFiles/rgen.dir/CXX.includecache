@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/rgen.cpp
+iostream
+-
+fstream
+-
+cstdlib
+-
+ctime
+-
+unistd.h
+-
+string
+-
+vector
+-
+rgen.h
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/rgen.h
+
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/rgen.h
+vector
+-
+string
+-
+

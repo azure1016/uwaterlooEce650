@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/graph.cpp
+graph.hpp
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/graph.hpp
+regex
+-
+queue
+-
+
+/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/graph.hpp
+stdio.h
+-
+iostream
+-
+vector
+-
+

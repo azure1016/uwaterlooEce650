@@ -1,0 +1,10 @@
+Error: there is no path from the source to the destiny!
+
+Error: invalid input!
+
+Error: invalid input!
+
+Error: invalid input!
+
+a2-ece650(224,0x7fffdc4d33c0) malloc: *** error for object 0x7fbb40d00030: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
