@@ -39,7 +39,8 @@ class Street(object):
         self.process_graph()
         self.valid_points.sort(key=lambda pt: pt.index,reverse = False)
         sys.stdout.write("V "+str(self.valid_points[-1].index + 1)+'\n')
-        sys.stdout.flush()
+
+
         #for v in self.valid_points:
             #sys.stdout.write(str(v)+"\n")
         #sys.stdout.write("}\n")
@@ -57,7 +58,7 @@ class Street(object):
             str_line += str(self.valid_edges[-1])
         str_line += "}\n"
         sys.stdout.write(str_line)
-        sys.stdout.flush()
+
         
 
     def get_coordinates(self,str_read):
@@ -112,7 +113,6 @@ class Street(object):
                     self.text_graph()
                 else:
                     sys.stderr.write("Error from a1: no match for the line.**"+str_read+'***\n')
-                    #pass
 
     def add_if_not_in(self,some_list,some_storage):
         for i in some_list:
@@ -120,13 +120,12 @@ class Street(object):
                 some_storage.append(i)
 
     def process_graph(self):
-        #reset database
+        #process valid_points
         del self.valid_edges[:]
         del self.valid_points[:]
         for l_o in self.eb_dc_l.keys():
             for l_n in self.eb_dc_l[l_o]:
                 del l_n.intersections[:]
-
         for i in self.eb_dc_l.keys():
             for j in self.eb_dc_l.keys():
                 if i!=j:
@@ -151,7 +150,7 @@ class Street(object):
             for l_i in self.eb_dc_l[i_i]:
                 if len(l_i.intersections)>0: #at this time, l2 has been compared with all the lines
                     v_p2 = [l_i.src, l_i.dst]
-                    v_pn2 = list(set(v_p2+l_i.intersections))                    
+                    v_pn2 = list(set(v_p2+l_i.intersections))
                     v_pn2.sort(key=lambda pt: pt.x, reverse = False)
                     v_pn2.sort(key=lambda pt: pt.y, reverse = False)
                     for ix in range(0, len(v_pn2) - 1):
@@ -169,12 +168,6 @@ class Point(object):
     def __eq__ (self, other):
         return self.x == other.x and self.y == other.y
 
-    def __ne__(self, other):
-        return (not self.__eq__(other))
-
-    def __hash__(self):
-        return hash(self.index)
-    
     def __ge__ (self, other):
         return self.x >= other.x
 
@@ -245,10 +238,10 @@ def intersect_on_segment (l1, l2,new_index):
         if 0 <= t and t <= 1 and 0 <= u and u <= 1:
             xnum = ((x1*y2 - y1*x2)*(x3-x4) - (x1-x2)*(x3*y4 - y3*x4))
             xcoor =  xnum / denominator
-            xcoor = round(xcoor, 2)
+
             ynum = (x1*y2 - y1*x2)*(y3-y4) - (y1-y2)*(x3*y4-y3*x4)
             ycoor = ynum / denominator
-            ycoor = round(ycoor, 2)
+
             return [Point(xcoor, ycoor, new_index)]
         else:
             return None
@@ -256,20 +249,18 @@ def intersect_on_segment (l1, l2,new_index):
 
 def main():
     ### YOUR MAIN CODE GOES HERE
-    ns = Street()
-    while True:
-        try:
+    try:
+        ns = Street()
+        while True:
             line = sys.stdin.readline()
             if line == '':
-                sys.exit(0)
+                break
             ns.process_cmd(line)
-        except:
-            #sys.stderr.write("Error detected. Please double-check your input!")
-            pass
-    
+    except exception1:
+        sys.stderr.write("Error detected. Please double-check your input!")
     # print 'Finished reading input'
     # return exit code 0 on successful termination
-    #sys.exit(0)
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()

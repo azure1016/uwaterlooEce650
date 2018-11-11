@@ -1,10 +1,3 @@
-//
-//  rgen.cpp
-//  test
-//
-//  Created by Bu's love on 2018/10/29.
-//  Copyright © 2018年 DanWang. All rights reserved.
-//
 
 #include <iostream>
 #include <fstream>
@@ -13,38 +6,33 @@
 #include <unistd.h>
 #include <string>
 #include <vector>
-#include "rgen.h"
+
+class RGen{
+public:
+    RGen();
+    std::string a_gen(int point_range = 20, int edge_range = 5);
+    
+    //void rgen(int st_num_max = 10, int edge_max = 5, int wait_sec = 5, int point_range = 20, int max_try = 25);
+    
+    int rgen(int argc, char** argv);
+    
+    bool IsDupPt(int x, int y);
+    bool IsDupName(const std::vector<std::string> &history, const std::string& name);
+private:
+    //pt_history used for one street. so clear it everytime finishing a street
+    std::vector<int> pt_history;
+    //name_street used for all streets. Don't clear it.
+    std::vector<std::string> name_history;
+};
 
 
-//Point::Point(){}
-//Point::Point(int x, int y){
-//    x = x;
-//    y = y;
-//}
-//
-//bool Point::GreaterThan(Point other){}
-//
-//bool Point::LessThan(Point other){}
-//Line::Line(){}
-//Line::Line(Point x, Point y){
-//    src = x;
-//    dst = y;
-//}
-//
-//bool Line::GreaterThan(Line other){
-//    bool ge1 = (src <= other.src) & (src <= other.dst) & (dst >= other.src) & (dst >= other.dst);
-//    bool ge2 = (dst <= other.src) & (dst <= other.dst) & (src >= other.src) & (dst >= other.dst);
-//    return (ge1 | ge2);
-//}
 RGen::RGen(){}
 
-bool RGen::IsDupPt(int *arr){
-    for(auto i = pt_history.begin(); i != pt_history.end(); i++){
-        std::cout << *arr << *(*i+1)<< *(arr+1) << std::endl;
-        std::cout << **i << std::endl;
-        bool b1 = (*arr == **i);
-        bool b2 = (*(arr+1) == *(*i+1));
-        if(b1 && b2) return true;
+bool RGen::IsDupPt(int x, int y){
+    for(int i = 0; i < pt_history.size(); i += 2){
+        if (x == pt_history.at(i))
+            if (y == pt_history.at(i+1))
+                return true;
     }
     return false;
 }
@@ -86,13 +74,23 @@ bool RGen::IsDupName(const std::vector<std::string> &history, const std::string&
 
 ///overload, generates street names automatically
 std::string RGen::a_gen(int point_range, int edge_range){
-    std::string street_name =" ";
+    //setup for urandom
+    std::ifstream urandom("/dev/urandom");
+    if (urandom.fail()) {
+        std::cerr << "Error: cannot open /dev/urandom\n";
+        return "";
+    }
+    int num = 0;//use it to read from urandom
+    
+    std::string street_name = "";
     std::string st_factory[10] = {"Daven", "Weber", "University", "George", "Cedarbrae", "Parkside",  "Wall", "London", "King", "Hazel"};
     std::string st_type[4] = {"Street", "Avenue", "Road", "Lane"};
     while(true){
-        int st_idx = rand() % 10;
-        int st_type_idx = rand() % 4;
-        street_name = "\""+st_factory[st_idx]+" "+st_type[st_type_idx]+"\"";
+        urandom.read((char*)&num, sizeof(int));
+        int st_idx = (int)abs(num) % 10;
+        urandom.read((char*)&num, sizeof(int));
+        int st_type_idx = (int)abs(num) % 4;
+        street_name = "\"" + st_factory[st_idx] + " " + st_type[st_type_idx] + "\"";
         if(!IsDupName(name_history, street_name)){
             name_history.push_back(street_name);
             break;
@@ -100,21 +98,29 @@ std::string RGen::a_gen(int point_range, int edge_range){
     }
     std::string res = "a ";
     res += street_name;
+    
     /// -n k >= 1
-    int edges = rand() % edge_range + 1;
+    urandom.read((char*)&num, sizeof(int));
+    int edges = (int)abs(num) % edge_range + 1;
     char coor[12] = "";
     for(int i = 0; i < edges + 1; i++){     //n edges->n+1 points
-        int x = rand() % (point_range + 1);
-        int y = rand() % (point_range + 1);
-        int arr[2] = {x, y};
-        if(!IsDupPt(arr)){
-            pt_history.push_back(arr);
+        urandom.read((char*)&num, sizeof(int));
+        int x = (int)num % (point_range + 1);
+        urandom.read((char*)&num, sizeof(int));
+        int y = (int)num % (point_range + 1);
+        
+        if(!IsDupPt(x,y)){
+            pt_history.push_back(x);
+            pt_history.push_back(y);
             snprintf(coor, sizeof(coor)," (%d,%d)", x, y);
             std::string coor_s(coor);
             res += coor_s;
         }
         else i--;
     }
+    if (pt_history.size() != 0)
+        pt_history.clear();//clear it for the next street;
+    urandom.close();
     return res;
 }
 
@@ -141,17 +147,13 @@ std::string RGen::a_gen(int point_range, int edge_range){
 //}
 
 int RGen::rgen(int argc, char** argv){
-    std::ifstream urandom("/dev/urandom");
-    if (urandom.fail()) {
-        std::cerr << "Error: cannot open /dev/urandom\n";
-        return 1;
-    }
+    
     int st_num_max = 10;
     int edge_max = 5;
     int wait_sec = 5;
     int point_range = 20;
-    int max_try = 25;
-    int c;
+    //int max_try = 25;
+    int c = -1;
     std::string param = "";
     while ((c = getopt(argc, argv, "s:n:l:c:")) != -1){
         switch(c){
@@ -182,102 +184,38 @@ int RGen::rgen(int argc, char** argv){
         }
     }
     while(true){
+        std::ifstream urandom("/dev/urandom");
+        if (urandom.fail()) {
+            std::cerr << "Error: cannot open /dev/urandom\n";
+            return 1;
+        }
         //int st_num = rand()%(st_num_max - 1) + 2;
-        unsigned int num = 42;
+        int num = 42;
         urandom.read((char*)&num, sizeof(int));
-        int st_num = (int)num % (st_num_max-1) + 2;
+        int st_num = (int)abs(num) % (st_num_max-1) + 2;
 
-        while (max_try > 0){
+        while (st_num >= 0){
             if (st_num == 0){
                 std::cout<<"g"<<std::endl;
                 break;
             }
             std::cout<<a_gen(point_range, edge_max)<<std::endl;//this will be redirect to pipe
-            max_try--;
+            //max_try--;
+            st_num--;
         }
         sleep((unsigned)wait_sec);
-//        for (auto i = name_history.begin(); i != name_history.end(); i++){
-//            std::cout<<"r "+*i<<std::endl;
-//            //i = name_history.erase(i);//invalidation of iterator?
-//        }
-//        name_history.clear();
-    }
-    // close random stream
-    urandom.close();
+        for (auto i = name_history.begin(); i != name_history.end(); i++){
+            std::cout << "r " + *i << std::endl;
+        }
+        name_history.clear();
+        // close random stream
+        urandom.close();
+    } 
     return 0;
 }
 
-int RGen::r_gen(){
-    int st_num_max = 10;
-    int edge_max = 5;
-    int wait_sec = 5;
-    int point_range = 20;
-    int max_try = 25;
-    
-    std::string param = "";
-        while(true){
-            int st_num = rand()%(st_num_max - 1) + 2;
-            while (max_try > 0){
-                if (st_num == 0){
-                    std::cout<<"g"<<std::endl;
-                    break;
-                }
-                std::string line = a_gen(point_range, edge_max);
-                std::cout << line << std::endl;//this will be redirect to pipe
-                max_try--;
-            }
-            sleep((unsigned)wait_sec);
-            //        for (auto i = name_history.begin(); i != name_history.end(); i++){
-            //            std::cout<<"r "+*i<<std::endl;
-            //            //i = name_history.erase(i);//invalidation of iterator?
-            //        }
-            //        name_history.clear();
-    }
-    return 0;
-}
-
-//
-//bool Line::IsIntersect(Line l2){
-//    int x1 = src.x;
-//    int y1 = src.y;
-//    int x2 = dst.x;
-//    int y2 = dst.y;
-//    int x3 = l2.src.x;
-//    int y3 = l2.src.y;
-//    int x4 = l2.dst.x;
-//    int y4 = l2.dst.y;
-////to determine whether the two lines would intersect on the 2 segments
-//    int t_up = (x1-x3)*(y3-y4) - (y1-y3)*(x3-x4);
-//    int u_up = -(x1-x2)*(y1-y3) + (y1-y2)*(x1-x3);
-//    int denominator = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4);
-////if they are parallel or coincident:
-//    if (denominator == 0){
-////coincident
-//        if ((x1-x2) * (y2-y3) == (x2-x3) * (y1-y2)){
-//            if (l1.__ge__(l2))
-//                return true;
-//            else if (l2.__ge__(l1))
-//                return true;
-//            else
-//                return false;
-//        }
-////parallel
-//        else{
-//            return false;
-//        }
-//    }
-//    else{
-//        int t = t_up / denominator;
-//        int u = u_up / denominator;
-////if the intersection is on both segments
-//        if (0 <= t and t <= 1 and 0 <= u and u <= 1)
-//            return true;
-//        else
-//            return false;
-//    }
-//}
-int main(){
+int main(int argv, char** argc){
     RGen r;
-    r.r_gen();
+    r.rgen(argv, argc);
     return 1;
 }

@@ -8,12 +8,13 @@ int main(){
     string v3,e3,s3;
     while(!cin.eof()){
         getline(cin,v3);
-        
-        if(v3[0] == 'V'){
-            //std::cout << v3 << std::endl;
+        if(v3 == "") exit(1);
+        else if(v3[0] == 'V'){
+            std::cout << v3 << std::endl;
             getline(cin,e3);
-            if(e3[0] == 'E'){
-                //std::cout << e3 << std::endl;
+            if(e3 == "") exit(1);
+            else if(e3[0] == 'E'){
+                std::cout << e3 << std::endl;
                 try{
                     if(g3 != NULL){
                         delete g3;
@@ -44,10 +45,10 @@ int main(){
                     std::cerr << i <<std::endl;
                 }
             }
-            else std::cerr << "Error: invalid input!\n" << std::endl;
+            //else std::cerr << "Error << a2: invalid input!\n" << std::endl;
         }
-        else{
-            std::cerr << "Error: invalid input! Graph object is null!" << std::endl;
+        else {
+            //std::cerr << "Error: invalid input! Graph object is null!" << std::endl;
         }
     }
     return 0;

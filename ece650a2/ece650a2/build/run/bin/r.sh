@@ -1,5 +1,4 @@
-#!/usr/bin/env bash 
+#!/bin/bash
 cd ../..
 make install
 cd run/bin
-./a3-ece650

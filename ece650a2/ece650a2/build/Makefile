@@ -157,6 +157,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named rgen
+
+# Build rule for target.
+rgen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rgen
+.PHONY : rgen
+
+# fast build rule for target.
+rgen/fast:
+	$(MAKE) -f CMakeFiles/rgen.dir/build.make CMakeFiles/rgen.dir/build
+.PHONY : rgen/fast
+
+#=============================================================================
 # Target rules for targets named a3-ece650
 
 # Build rule for target.
@@ -181,19 +194,6 @@ a2-ece650: cmake_check_build_system
 a2-ece650/fast:
 	$(MAKE) -f CMakeFiles/a2-ece650.dir/build.make CMakeFiles/a2-ece650.dir/build
 .PHONY : a2-ece650/fast
-
-#=============================================================================
-# Target rules for targets named rgen
-
-# Build rule for target.
-rgen: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rgen
-.PHONY : rgen
-
-# fast build rule for target.
-rgen/fast:
-	$(MAKE) -f CMakeFiles/rgen.dir/build.make CMakeFiles/rgen.dir/build
-.PHONY : rgen/fast
 
 #=============================================================================
 # Target rules for targets named graph
@@ -326,11 +326,11 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
+	@echo "... rgen"
 	@echo "... rebuild_cache"
 	@echo "... a3-ece650"
 	@echo "... install/local"
 	@echo "... a2-ece650"
-	@echo "... rgen"
 	@echo "... graph"
 	@echo "... a2-ece650.o"
 	@echo "... a2-ece650.i"

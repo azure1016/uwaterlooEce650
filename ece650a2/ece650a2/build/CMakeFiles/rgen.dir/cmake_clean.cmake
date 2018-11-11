@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/rgen.dir/rgen.cpp.o"
-  "librgen.pdb"
-  "librgen.a"
+  "rgen.pdb"
+  "rgen"
 )
 
 # Per-language clean rules from dependency scanning.

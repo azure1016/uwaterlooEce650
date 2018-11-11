@@ -79,7 +79,6 @@ a3__ece650_EXTERNAL_OBJECTS =
 
 a3-ece650: CMakeFiles/a3-ece650.dir/a3-ece650.cpp.o
 a3-ece650: CMakeFiles/a3-ece650.dir/build.make
-a3-ece650: librgen.a
 a3-ece650: CMakeFiles/a3-ece650.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable a3-ece650"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/a3-ece650.dir/link.txt --verbose=$(VERBOSE)

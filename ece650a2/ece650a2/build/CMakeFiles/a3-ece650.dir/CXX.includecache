@@ -17,16 +17,10 @@ signal.h
 -
 sys/types.h
 -
+sys/wait.h
+-
 unistd.h
 -
 iostream
--
-rgen.h
-/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/rgen.h
-
-/Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2/rgen.h
-vector
--
-string
 -
 

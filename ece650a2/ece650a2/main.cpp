@@ -8,27 +8,12 @@
 using namespace std;
 
 void test(){
-    //while(true){
     std::cout<<"a \"weberstreet\" (-1,-1) (1,0.5) (1,2) (0,3)"<<std::endl;
-    //sleep(1);
     std::cout<<"a \"king\" (2,-2) (1,0) (1,3) (4,5)"<< std::endl;
-    //sleep(1);
     std::cout<<"g"<< std::endl;
-    //sleep(1);
-    //}
 }
 
 int rgen(int argc, char **argv) {
-//    argv[0]="rgen";
-//    char* arg_list[] = {
-//            "rgen",
-//            nullptr
-//            nullptr
-//    };
-
-//    int mes=execv("./rgen",argv);
-//    if(mes==-1)
-//        perror("Error:from rgen");
     test();
     return 0;
 }
