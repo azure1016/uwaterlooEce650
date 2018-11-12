@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <unistd.h>
-#include <string>
+#include <string.h>
 #include <vector>
 
 class RGen{
@@ -29,7 +29,7 @@ private:
 RGen::RGen(){}
 
 bool RGen::IsDupPt(int x, int y){
-    for(int i = 0; i < pt_history.size(); i += 2){
+    for(unsigned int i = 0; i < pt_history.size(); i += 2){
         if (x == pt_history.at(i))
             if (y == pt_history.at(i+1))
                 return true;

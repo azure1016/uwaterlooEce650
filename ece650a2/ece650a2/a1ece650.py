@@ -12,6 +12,12 @@ class Street(object):
     point_history = []
     uniq_v_index = 0
 
+    def reset(self):
+        self.point_history = []
+        self.uniq_v_index = 0
+        self.valid_edges = []
+        self.valid_points = []
+
     def add_street(self,street_name,vi_l,ei_l):
         #vi_l = get_coordinates(),ei_l = get_lines()
         stn = street_name.upper()
@@ -25,6 +31,9 @@ class Street(object):
         if self.vb_dc_l.has_key(street_name.upper()) == True:
             del self.vb_dc_l[street_name.upper()]
             del self.eb_dc_l[street_name.upper()]
+            if len(self.vb_dc_l) == 0:
+                self.reset()
+                #pass
         else:
             sys.stderr.write("Error: invalid command:The street you want to delete doesn't even exist!\n")
 
