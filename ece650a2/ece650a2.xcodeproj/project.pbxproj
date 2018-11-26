@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		E72CC041216CF41A00D77C13 /* a2-ece650.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E72CC040216CF41A00D77C13 /* a2-ece650.cpp */; };
 		E72CC049216D546F00D77C13 /* graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E72CC047216D546F00D77C13 /* graph.cpp */; };
-		E7A82029217BC08500C0DD2F /* a2-ece650.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A82026217BC08500C0DD2F /* a2-ece650.cpp */; };
-		E7A8202A217BC08500C0DD2F /* graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A82027217BC08500C0DD2F /* graph.cpp */; };
+		E758928021978CEE0085F236 /* rgen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E758927E21978CEE0085F236 /* rgen.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,9 +28,7 @@
 		E72CC03D216CF41A00D77C13 /* ece650a2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ece650a2; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72CC040216CF41A00D77C13 /* a2-ece650.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "a2-ece650.cpp"; sourceTree = "<group>"; };
 		E72CC047216D546F00D77C13 /* graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graph.cpp; path = ece650a2/graph.cpp; sourceTree = "<group>"; };
-		E7A82026217BC08500C0DD2F /* a2-ece650.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "a2-ece650.cpp"; path = "ece650a2/a2-ece650.cpp"; sourceTree = SOURCE_ROOT; };
-		E7A82027217BC08500C0DD2F /* graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graph.cpp; path = ece650a2/graph.cpp; sourceTree = SOURCE_ROOT; };
-		E7A82028217BC08500C0DD2F /* graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = graph.hpp; path = ece650a2/graph.hpp; sourceTree = SOURCE_ROOT; };
+		E758927E21978CEE0085F236 /* rgen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rgen.cpp; path = ece650a2/rgen.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +53,7 @@
 		E7A82025217BC05100C0DD2F /* /Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2.xcodeproj */ = {
 			isa = PBXGroup;
 			children = (
-				E7A82026217BC08500C0DD2F /* a2-ece650.cpp */,
-				E7A82027217BC08500C0DD2F /* graph.cpp */,
-				E7A82028217BC08500C0DD2F /* graph.hpp */,
+				E758927E21978CEE0085F236 /* rgen.cpp */,
 			);
 			path = /Users/liujinjian/ece650/uwaterlooEce650/ece650a2/ece650a2.xcodeproj;
 			sourceTree = "<absolute>";
@@ -120,10 +115,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7A8202A217BC08500C0DD2F /* graph.cpp in Sources */,
-				E7A82029217BC08500C0DD2F /* a2-ece650.cpp in Sources */,
 				E72CC049216D546F00D77C13 /* graph.cpp in Sources */,
 				E72CC041216CF41A00D77C13 /* a2-ece650.cpp in Sources */,
+				E758928021978CEE0085F236 /* rgen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

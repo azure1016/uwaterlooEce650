@@ -3,7 +3,7 @@
 #include "graph.hpp"
 using namespace std;
 
-int main(){
+int main(void){
     Graph* g3 = NULL;
     string v3,e3,s3;
     while(!cin.eof()){
