@@ -1,0 +1,17 @@
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/install/local.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/install/strip.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/install.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/prj-ece650.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/list_install_components.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/rebuild_cache.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/CMakeFiles/edit_cache.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/install/local.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/install/strip.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/install.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/list_install_components.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/rebuild_cache.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/edit_cache.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/minisat_simp.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/minisat_core.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/minisat-lib-shared.dir
+/Users/liujinjian/ece650/uwaterlooEce650/project/prj/build/minisat/CMakeFiles/minisat-lib-static.dir
